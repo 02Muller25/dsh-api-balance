@@ -33,9 +33,16 @@ API 余额 CNY 18.22 · 可用 · 14:32:05 更新
 
 ## 安装（在目标 dsh web 部署上）
 
-1. 将本包放入 profile 的 node_modules：`$DSH_HOME/profiles/node_modules/api-balance/`（完整目录，含 `package.json` 与 `lib/`）。
-   若已发布到 npm 或用 GitHub 依赖，也可在 profile 里执行 `dsh plugin --profile web add <specifier>` 安装。
-2. 在 profile 的 `cordis.patch.yml` 追加（**必须是 `insert` 块** —— 补丁语义只允许新增行，普通条目只能覆盖已有行）：
+本仓库声明了 `dsh.bundle` manifest，可直接用 GitHub 依赖安装（推荐）：
+
+```bash
+dsh plugin --profile web add github:02Muller25/dsh-api-balance
+```
+
+或手动放置：
+
+1. 将本包放入 profile 的 node_modules：`$DSH_HOME/profiles/node_modules/api-balance/`（完整目录，含 `package.json`、`cordis.patch.yml` 与 `lib/`）。
+2. 在 profile 的 `cordis.patch.yml` 追加（**必须是 `insert` 块** —— 补丁语义只允许新增行，普通条目只能覆盖已有行；仓库根目录已附一份可直接参考）：
 
 ```yaml
 - insert:

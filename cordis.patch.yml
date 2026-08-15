@@ -1,0 +1,5 @@
+# api-balance loader entry — applied by `dsh plugin add` when this package
+# is installed into a profile. Adds the plugin row to the composed tree.
+- insert:
+    - id: api-balance
+      name: api-balance

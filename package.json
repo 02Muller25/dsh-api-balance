@@ -1,35 +1,38 @@
 {
-    "name":  "api-balance",
-    "version":  "0.2.1",
-    "description":  "Real-time DeepSeek API account balance readout for the DeepSeek Harness web GUI (dsh web).",
-    "private":  true,
-    "type":  "module",
-    "main":  "./lib/index.js",
-    "exports":  {
-                    ".":  "./lib/index.js",
-                    "./client":  {
-                                     "types":  "./lib/client.d.ts",
-                                     "default":  "./lib/client.js"
-                                 },
-                    "./package.json":  "./package.json"
-                },
-    "dsh":  {
-                "client":  {
-                               "platform":  "web",
-                               "inject":  [
-                                              "@deepseek-ai/dsh-client-ui-slots"
-                                          ]
-                           }
-            },
-    "keywords":  [
-                     "dsh",
-                     "deepseek",
-                     "harness",
-                     "plugin",
-                     "balance"
-                 ],
-    "license":  "MIT",
-    "engines":  {
-                    "node":  "\u003e=20"
-                }
+  "name": "api-balance",
+  "version": "0.2.1",
+  "description": "Real-time DeepSeek API account balance readout for the DeepSeek Harness web GUI (dsh web).",
+  "private": true,
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": {
+      "types": "./lib/client.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  },
+  "keywords": [
+    "dsh",
+    "deepseek",
+    "harness",
+    "plugin",
+    "balance"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
 }
