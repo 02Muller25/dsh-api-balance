@@ -9,6 +9,8 @@ Real-time DeepSeek API account balance readout for the DeepSeek Harness web GUI.
 API 余额 CNY 18.22 · 可用 · 14:32:05 更新
 ```
 
+![效果示意图](docs/screenshot.svg)
+
 - 每 30 秒自动刷新（挂载时立即查询一次）
 - 刷新失败时保留上次数据并显示黄色「刷新失败」，悬停可见具体原因，30 秒后自动重试
 - 余额不可用时显示红色「不可用」
@@ -56,3 +58,7 @@ API 余额 CNY 18.22 · 可用 · 14:32:05 更新
 ## 已知限制
 
 - 若对 profile 执行 `pnpm install`，手动放入 `node_modules` 的包可能被清理，需重新放置或改为正式依赖安装。
+
+## 许可证
+
+[MIT](LICENSE) © 2026 02Muller25

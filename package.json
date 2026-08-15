@@ -28,6 +28,7 @@
     "plugin",
     "balance"
   ],
+  "license": "MIT",
   "engines": {
     "node": ">=20"
   }
