@@ -1,6 +1,6 @@
 {
   "name": "api-balance",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Real-time DeepSeek API account balance readout for the DeepSeek Harness web GUI (dsh web).",
   "private": true,
   "type": "module",

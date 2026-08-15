@@ -12,7 +12,9 @@ API 余额 CNY 18.22 · 可用 · 14:32:05 更新
 ![效果示意图](docs/screenshot.svg)
 
 - 每 30 秒自动刷新（挂载时立即查询一次）
-- 刷新失败时保留上次数据并显示黄色「刷新失败」，悬停可见具体原因，30 秒后自动重试
+- **刷新模式可选**：手动刷新 / 每 10 秒 / 每 30 秒 / 每 1 分钟 / 每 5 分钟 / 自定义间隔（5–3600 秒），偏好保存在浏览器 localStorage，刷新页面后仍保留
+- 手动模式下点击「刷新」按钮即时刷新；自定义间隔即时生效
+- 刷新失败时保留上次数据并显示黄色「刷新失败」，悬停可见具体原因，下一次自动轮询自动恢复
 - 余额不可用时显示红色「不可用」
 - API 密钥通过 dsh 的 credentials 服务按需解析（`DEEPSEEK_API_KEY`），**不出宿主进程**
 
@@ -51,7 +53,7 @@ API 余额 CNY 18.22 · 可用 · 14:32:05 更新
 
 ## 自定义
 
-- 刷新间隔：`lib/client.js` 中 `setInterval(refresh, 30000)`
+- 刷新模式与间隔：读数带右侧的下拉框（手动 / 10s / 30s / 1min / 5min / 自定义），偏好持久化在 `localStorage`（键 `dsh.api-balance.refresh`）
 - 读取的凭证：`lib/index.js` 中 `credentials.resolve('DEEPSEEK_API_KEY')`
 - 余额接口：`lib/index.js` 中 `BALANCE_URL`
 

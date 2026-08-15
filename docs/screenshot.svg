@@ -1,13 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="840" height="140" viewBox="0 0 840 140">
-  <!-- 效果示意图：会话输入框下方的余额读数带（实际渲染于 DeepSeek Harness Web 界面） -->
-  <rect x="0" y="0" width="840" height="140" rx="14" fill="#16181d"/>
-  <rect x="20" y="20" width="800" height="100" rx="10" fill="#1d2129"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="140" viewBox="0 0 960 140">
+  <!-- 效果示意图：会话输入框下方的余额读数带（v0.2.0 含刷新模式控制；实际渲染于 DeepSeek Harness Web 界面） -->
+  <rect x="0" y="0" width="960" height="140" rx="14" fill="#16181d"/>
+  <rect x="20" y="20" width="920" height="100" rx="10" fill="#1d2129"/>
   <!-- 输入框占位 -->
   <rect x="40" y="42" width="560" height="24" rx="12" fill="#242934"/>
   <circle cx="585" cy="54" r="10" fill="#2b3140"/>
-  <!-- 读数带（右对齐） -->
-  <text x="800" y="100" text-anchor="end" font-family="Segoe UI, system-ui, sans-serif" font-size="14" fill="#8b93a5">API 余额</text>
-  <text x="726" y="100" text-anchor="end" font-family="Segoe UI, system-ui, sans-serif" font-size="14" font-weight="600" fill="#e6e9f0">CNY 18.22</text>
-  <text x="700" y="100" text-anchor="end" font-family="Segoe UI, system-ui, sans-serif" font-size="14" fill="#34d399">可用</text>
-  <text x="655" y="100" text-anchor="end" font-family="Segoe UI, system-ui, sans-serif" font-size="13" fill="#8b93a5" opacity="0.85">14:32:05 更新</text>
+  <!-- 读数带（右对齐）：控制 + 读数 -->
+  <rect x="890" y="80" width="60" height="18" rx="6" fill="none" stroke="#3a4152"/>
+  <text x="920" y="93" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="12" fill="#aab2c2">刷新</text>
+  <rect x="746" y="80" width="134" height="18" rx="6" fill="#1a1f29" stroke="#3a4152"/>
+  <text x="813" y="93" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="12" fill="#aab2c2">每 30 秒 ▾</text>
+  <text x="735" y="94" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="13" fill="#8b93a5" opacity="0.7">|</text>
+  <text x="712" y="94" text-anchor="end" font-family="Segoe UI, system-ui, sans-serif" font-size="13" fill="#8b93a5" opacity="0.85">14:32:05 更新</text>
+  <text x="662" y="94" text-anchor="end" font-family="Segoe UI, system-ui, sans-serif" font-size="14" fill="#34d399">可用</text>
+  <text x="630" y="94" text-anchor="end" font-family="Segoe UI, system-ui, sans-serif" font-size="14" font-weight="600" fill="#e6e9f0">CNY 18.22</text>
+  <text x="560" y="94" text-anchor="end" font-family="Segoe UI, system-ui, sans-serif" font-size="14" fill="#8b93a5">API 余额</text>
 </svg>
