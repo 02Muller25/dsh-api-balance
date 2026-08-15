@@ -1,0 +1,58 @@
+# api-balance
+
+实时显示 DeepSeek API 账户余额的 DeepSeek Harness（dsh web）插件。
+Real-time DeepSeek API account balance readout for the DeepSeek Harness web GUI.
+
+在会话输入框下方的读数带（`conversation.composer.dock`）显示：
+
+```
+API 余额 CNY 18.22 · 可用 · 14:32:05 更新
+```
+
+- 每 30 秒自动刷新（挂载时立即查询一次）
+- 刷新失败时保留上次数据并显示黄色「刷新失败」，悬停可见具体原因，30 秒后自动重试
+- 余额不可用时显示红色「不可用」
+- API 密钥通过 dsh 的 credentials 服务按需解析（`DEEPSEEK_API_KEY`），**不出宿主进程**
+
+## 架构
+
+| 文件 | 平台 | 作用 |
+| --- | --- | --- |
+| `lib/index.js` | Host | 注册精确路由 `GET /api/abal-balance`；每次请求实时解析凭证并 curl `https://api.deepseek.com/user/balance` |
+| `lib/client.js` | Client (web) | 手工编写的 `window.__ModuleLoader__.load` 格式 bundle（dsh web 的标准客户端包格式，无需构建管线）；在输入框读数带渲染余额，每 30s `fetch` 刷新 |
+| `lib/client.d.ts` | — | 客户端类型占位 |
+
+依赖的宿主服务：`webServer`、`credentials`、`shell`、`sandboxPolicy`（均为 dsh 标准服务）。
+客户端侧仅依赖 `react`（种子模块）与 `slots` 服务。
+
+> 说明：curl 调用以 `danger-full-access` 策略运行 —— 它是只读网络请求、无文件副作用，绕过平台沙箱 runner 是刻意的（在 Windows ACL 受限令牌下该请求已验证会失败）。
+
+## 安装（在目标 dsh web 部署上）
+
+1. 将本包放入 profile 的 node_modules：`$DSH_HOME/profiles/node_modules/api-balance/`（完整目录，含 `package.json` 与 `lib/`）。
+   若已发布到 npm 或用 GitHub 依赖，也可在 profile 里执行 `dsh plugin --profile web add <specifier>` 安装。
+2. 在 profile 的 `cordis.patch.yml` 追加（**必须是 `insert` 块** —— 补丁语义只允许新增行，普通条目只能覆盖已有行）：
+
+```yaml
+- insert:
+    - id: api-balance
+      name: 'api-balance'
+```
+
+3. 重启 dsh web 服务（组合只在启动时读取）。
+
+## 启用 / 禁用 / 卸载
+
+- 禁用：补丁条目加 `disabled: true`，重启
+- 卸载：删除补丁条目 + 删除 `profiles/node_modules/api-balance/`，重启
+- 设置 → 插件市场中的列表是只读的（对官方插件同样如此），启停均通过补丁 + 重启完成
+
+## 自定义
+
+- 刷新间隔：`lib/client.js` 中 `setInterval(refresh, 30000)`
+- 读取的凭证：`lib/index.js` 中 `credentials.resolve('DEEPSEEK_API_KEY')`
+- 余额接口：`lib/index.js` 中 `BALANCE_URL`
+
+## 已知限制
+
+- 若对 profile 执行 `pnpm install`，手动放入 `node_modules` 的包可能被清理，需重新放置或改为正式依赖安装。
